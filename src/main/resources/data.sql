@@ -8,9 +8,9 @@ CREATE TABLE Profile (
 	
 );
 
-INSERT INTO PROFILE (email, password, name, surname, phone) VALUES('gustavo@email.com','123', 'Gustavo', 'Melo', '11991234567');
-INSERT INTO PROFILE (email, password, name, surname, phone) VALUES('henrique@email.com','123', 'Henrique', 'Lima', '11991234567');
-INSERT INTO PROFILE (email, password, name, surname, phone) VALUES('vinicius@email.com','123', 'Vinicius', 'Santos', '11991234567');
+INSERT INTO PROFILE (email, password, name, surname, phone) VALUES('gustavo@email.com','$2a$12$48Gv3FhuIdSshXz.UWatxuHpTbDfxV0r.6WwmpPfXd8fd2X.hYweS', 'Gustavo', 'Melo', '11991234567');
+INSERT INTO PROFILE (email, password, name, surname, phone) VALUES('henrique@email.com','$2a$12$48Gv3FhuIdSshXz.UWatxuHpTbDfxV0r.6WwmpPfXd8fd2X.hYweS', 'Henrique', 'Lima', '11991234567');
+INSERT INTO PROFILE (email, password, name, surname, phone) VALUES('vinicius@email.com','$2a$12$48Gv3FhuIdSshXz.UWatxuHpTbDfxV0r.6WwmpPfXd8fd2X.hYweS', 'Vinicius', 'Santos', '11991234567');
 
 CREATE TABLE Crm (
 	id int PRIMARY KEY auto_increment,

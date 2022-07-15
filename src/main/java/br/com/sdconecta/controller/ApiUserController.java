@@ -25,6 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.sdconecta.model.User;
 import br.com.sdconecta.repository.UserRepository;
+import br.com.sdconecta.service.AuthenticationService;
 
 @RestController
 @RequestMapping("/api/user")
@@ -50,6 +51,7 @@ public class ApiUserController {
 	@PostMapping()
 	@CacheEvict(value = "users", allEntries = true)
 	public ResponseEntity<User> create(@RequestBody @Valid User user, UriComponentsBuilder uriBuilder){
+		user.setPassword(AuthenticationService.getPasswordEnconder().encode(user.getPassword()));
 		u.save(user);
 		URI uri = uriBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(uri).build();

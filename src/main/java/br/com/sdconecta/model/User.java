@@ -1,6 +1,7 @@
 package br.com.sdconecta.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -22,7 +26,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Profile", uniqueConstraints={@UniqueConstraint(columnNames={"email"}), })
-public class User {
+public class User implements UserDetails {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -48,6 +54,36 @@ public class User {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Crm> crms = new ArrayList<>();
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 	
 		
 
