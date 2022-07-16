@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.sdconecta.model.Crm;
+import br.com.sdconecta.model.User;
 import br.com.sdconecta.repository.CrmRepository;
 
 
@@ -41,7 +43,9 @@ public class ApiCrmController {
 	
 	@PostMapping()
 	@CacheEvict(value = "crms", allEntries = true)
-	public ResponseEntity<Crm> create(@RequestBody @Valid Crm crm, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<Crm> create(@RequestBody @Valid Crm crm, UriComponentsBuilder uriBuilder, Authentication auth){
+		User user = (User) auth.getPrincipal();
+		crm.setUser(user);
 		c.save(crm);
 		URI uri = uriBuilder.path("/api/crm/{id}").buildAndExpand(crm.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -67,6 +71,7 @@ public class ApiCrmController {
 		Optional<Crm> crm1 = c.findById(id);
 		if (crm1.isEmpty()) return ResponseEntity.notFound().build();
 		crm.setId(id);
+		crm.setUser(crm1.get().getUser());
 		c.save(crm);
 		return ResponseEntity.ok(crm);
 	}

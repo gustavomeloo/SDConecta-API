@@ -32,9 +32,7 @@ public class Crm {
 	@Size(max = 255, message = "A especialidade deve ter no máximo 255 caracteres")
 	private String specialty;
 	
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@ManyToOne
 	private User user;
 
 }

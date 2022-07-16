@@ -23,3 +23,4 @@ CREATE TABLE Crm (
 INSERT INTO Crm (crm, uf, specialty, user_id) VALUES('1234', 'SP','RADIOLOGIA E DIAGNÓSTICO POR IMAGEM', 1);
 INSERT INTO Crm (crm, uf, specialty, user_id) VALUES('2334', 'RJ','CLINICO GERAL', 3);
 INSERT INTO Crm (crm, uf, specialty, user_id) VALUES('3456','MG','CIRURGIÃO', 2);
+
